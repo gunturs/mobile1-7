@@ -1,0 +1,191 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(new MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: new ClassCoba(),
+  ),
+ );
+}
+
+
+class _PenjumlahanState extends State<Penjumlahan> {
+  final txtsisiBalok = TextEditingController();
+  final txthasil = TextEditingController();
+
+  String result = '';
+
+getTextInputDataSisiBalok() {
+    setState(() {
+      var keliling = 12;
+      var sisi = int.parse(txtsisiBalok.text);
+      var hasil = keliling * sisi;
+      result = hasil.toString();
+    });
+  }
+  
+  
+  getTextInputDataHapus() {
+    setState(() {
+      var hasil = '';
+      result = hasil.toString();
+    });
+  }
+
+  @override
+ Widget build(BuildContext context) {
+    return Scaffold(
+        body: Center(
+      child:  Column(
+        children: <Widget>[
+          Container(
+              width: 280,
+              padding: EdgeInsets.all(10.0),
+              child: TextField(
+                controller: txtsisiBalok,
+                autocorrect: true,
+                decoration: InputDecoration(hintText: 'Masukkan Sisi Balok'),
+              )),
+          RaisedButton(
+            onPressed: getTextInputDataSisiBalok,
+            color: Color(0xffFF1744),
+            textColor: Colors.white,
+            padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+            child: Text('Proses'),
+          ),
+          RaisedButton(
+            onPressed: getTextInputDataHapus,
+            color: Color(0xffFF1744),
+            textColor: Colors.white,
+            padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+            child: Text('Hapus'),
+          ),
+          Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text("Hasil = $result", style: TextStyle(fontSize: 20)))
+        ],
+      ),
+    ));
+  }
+}
+
+class ClassCoba extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.lightGreen,
+        
+        //leading: Icon(IconData(58929, fontFamily: 'MaterialIcons'),),
+        title: Text("UTS"),
+         actions: <Widget>[
+          IconButton(
+            icon: Icon(IconData(59590, fontFamily: 'MaterialIcons')),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Pemberitahuan()),
+              );
+            },
+          ),
+        ],
+      ),
+      
+      
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.green,
+              ),
+              child: Text(
+                'App Bar Application',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+          
+            ListTile(
+              leading: Icon(
+                IconData(59475, fontFamily: 'MaterialIcons'),
+                color: Colors.green,
+              ),
+              title: Text('Biodata'),
+              onTap: () {Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Biodata()),
+           );
+              },
+            ),
+            ListTile(
+              leading: Icon(IconData(58128, fontFamily: 'MaterialIcons'),
+                  color: Colors.orange),
+              title: Text('Rumus'),
+              onTap: () {Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Rumus()),
+           );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Pemberitahuan extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+      title: Text("Pemberitahuan"),
+      backgroundColor: Colors.green,
+    ));
+  }
+}
+
+class Biodata extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+      title: Text("Profil"),
+      backgroundColor: Colors.green,
+      ),
+      body: new Column(
+         mainAxisAlignment: MainAxisAlignment.start,
+         children: <Widget>[
+        Text("Nama    : Rika Wati Sitorus"),
+        Text("Kelas   : 5Mia2"),
+        Text("Alamat  : Pematang siantar"),
+           Text("TTL  : 23 Januari 2000"),
+           Text("No. Telp : 081264736150"),
+         ],
+       ),
+    );
+  }
+}
+
+class Penjumlahan extends StatefulWidget {
+  _PenjumlahanState createState() => _PenjumlahanState();
+}
+
+
+
+class Rumus extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+      title: Text("Rumus Luas Keliling Balok"),
+      backgroundColor: Colors.green,
+      ),
+      body: Penjumlahan(),
+    );
+  }
+}
